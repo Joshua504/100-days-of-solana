@@ -25,10 +25,14 @@ func createWallet() {
 			log.Println("error closing client:", err)
 		}
 	}()
+
+	//Getting Balance
 	result, err := client.GetBalance(context.Background(), solana.MustPublicKeyFromBase58("ASr7BW5o7PdQfrg6zjtzT8Y3i4GwNukfoSnu196Y6u2U"), rpc.CommitmentFinalized)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	//converting Lamport to SOL
 	balanceInSol := float64(result.Value) / 1_000_000_000
 	fmt.Printf("Your Balance: %f SOL\n", balanceInSol)
 }
